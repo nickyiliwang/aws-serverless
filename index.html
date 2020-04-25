@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .wrapper {
+        margin: 0 auto;
+        width: 80%;
+        max-width: 1440px;
+      }
+
+      header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      button {
+        color: red;
+        margin: 5px;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="wrapper">
+      <h2 class="name">
+        I have no name yet, what is my name?
+      </h2>
+      <button class="fetch">
+        Click me to fetch a name pls!
+      </button>
+    </header>
+  </body>
+
+  <script>
+    const fetchButton = document.querySelector(".fetch");
+    const name = document.querySelector(".name");
+
+    fetchButton.addEventListener("click", () => {
+      fetch(
+        "https://d0vfvufwl0.execute-api.us-east-1.amazonaws.com/default/myFirstPythonLambda"
+      )
+        .then((res) => res.text())
+        .then((data) => {
+          name.textContent = `My name is ${data}`;
+        })
+        .catch((err) => console.error(err));
+    });
+  </script>
+</html>
